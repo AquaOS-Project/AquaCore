@@ -33,7 +33,7 @@ static struct stivale2_header stivale_hdr = {
 };
 
 void *stivale2_get_tag(struct stivale2_struct *stivale2_struct, uint64_t id) {
-    struct stivale2_tag *current_tag = (void *)stivale2_struct->tags;
+    stivale2_tag *current_tag = (stivale2_tag*)stivale2_struct->tags;
     for (;;) {
         if (current_tag == NULL) {
             return NULL;
@@ -46,7 +46,7 @@ void *stivale2_get_tag(struct stivale2_struct *stivale2_struct, uint64_t id) {
         current_tag = (stivale2_tag*)current_tag->next;
     }
 }
-
+using stivale2_term_write = void(*)(const char *, size_t);
 extern "C" void _start(struct stivale2_struct *stivale2_struct) {
     stivale2_struct_tag_terminal *term_str_tag;
     term_str_tag = (struct stivale2_struct_tag_terminal *)stivale2_get_tag(stivale2_struct, STIVALE2_STRUCT_TAG_TERMINAL_ID);
@@ -56,7 +56,9 @@ extern "C" void _start(struct stivale2_struct *stivale2_struct) {
         }
 }
     void *term_write_ptr = (void *)term_str_tag->term_write;
-    void (*term_write)(const char *string, size_t length) = term_write_ptr;
+    
+
+    stivale2_term_write term_write = (stivale2_term_write) term_write_ptr;
     term_write("Hello, World!\n", 13);
     for (;;) {
         asm ("hlt");
