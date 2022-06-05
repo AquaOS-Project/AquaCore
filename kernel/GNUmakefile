@@ -13,9 +13,9 @@ define DEFAULT_VAR =
 endef
 
 # It is highly recommended to use a custom built cross toolchain to build a kernel.
-# We are only using "cc" as a placeholder here. It may work by using
+# We are only using "cxx" as a placeholder here. It may work by using
 # the host system's toolchain, but this is not guaranteed.
-$(eval $(call DEFAULT_VAR,CC,cc))
+$(eval $(call DEFAULT_VAR,CCX,cxx))
 
 # Likewise, "ld" here is just a placeholder and your mileage may vary if using the
 # host's "ld".
@@ -53,10 +53,10 @@ override INTERNALLDFLAGS :=    \
 	-zmax-page-size=0x1000 \
 	-static
 
-# Use find to glob all *.c files in the directory and extract the object names.
-override CFILES := $(shell find ./ -type f -name '*.c')
-override OBJ := $(CFILES:.c=.o)
-override HEADER_DEPS := $(CFILES:.c=.d)
+# Use find to glob all *.cpp files in the directory and extract the object names.
+override CFILES := $(shell find ./ -type f -name '*.cpp')
+override OBJ := $(CFILES:.cpp=.o)
+override HEADER_DEPS := $(CFILES:.cpp=.d)
 
 # Default target.
 .PHONY: all
@@ -69,10 +69,10 @@ stivale2.h:
 $(KERNEL): $(OBJ)
 	$(LD) $(OBJ) $(LDFLAGS) $(INTERNALLDFLAGS) -o $@
 
-# Compilation rules for *.c files.
+# Compilation rules for *.cpp files.
 -include $(HEADER_DEPS)
-%.o: %.c stivale2.h
-	$(CC) $(CFLAGS) $(INTERNALCFLAGS) -c $< -o $@
+%.o: %.cpp stivale2.h
+	$(CXX) $(CFLAGS) $(INTERNALCFLAGS) -c $< -o $@
 
 # Remove object files and the final executable.
 .PHONY: clean
