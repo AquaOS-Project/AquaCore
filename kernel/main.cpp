@@ -43,13 +43,13 @@ void *stivale2_get_tag(struct stivale2_struct *stivale2_struct, uint64_t id) {
             return current_tag;
         }
 
-        current_tag = (void *)current_tag->next;
+        current_tag = (stivale2_tag*)current_tag->next;
     }
 }
 
-void _start(struct stivale2_struct *stivale2_struct) {
-    struct stivale2_struct_tag_terminal *term_str_tag;
-    term_str_tag = stivale2_get_tag(stivale2_struct, STIVALE2_STRUCT_TAG_TERMINAL_ID);
+extern "C" void _start(struct stivale2_struct *stivale2_struct) {
+    stivale2_struct_tag_terminal *term_str_tag;
+    term_str_tag = (struct stivale2_struct_tag_terminal *)stivale2_get_tag(stivale2_struct, STIVALE2_STRUCT_TAG_TERMINAL_ID);
     if (term_str_tag == NULL) {
         for (;;) {
             asm ("hlt");
