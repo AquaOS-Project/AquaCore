@@ -6,19 +6,19 @@ all-hdd: aqua.hdd
 
 .PHONY: run
 run: aqua.iso
-	qemu-system-x86_64 -M q35 -m 2G -cdrom aqua.iso -boot d
+	qemu-system-x86_64 -M q35 -m 2G -cdrom aqua.iso -boot d -debugcon stdio
 
 .PHONY: run-uefi
 run-uefi: ovmf-x64 aqua.iso
-	qemu-system-x86_64 -M q35 -m 2G -bios ovmf-x64/OVMF.fd -cdrom aqua.iso -boot d
+	qemu-system-x86_64 -M q35 -m 2G -bios ovmf-x64/OVMF.fd -cdrom aqua.iso -boot d -debugcon stdio
 
 .PHONY: run-hdd
 run-hdd: aqua.hdd
-	qemu-system-x86_64 -M q35 -m 2G -hda aqua.hdd
+	qemu-system-x86_64 -M q35 -m 2G -hda aqua.hdd -debugcon stdio
 
 .PHONY: run-hdd-uefi
 run-hdd-uefi: ovmf-x64 aqua.hdd
-	qemu-system-x86_64 -M q35 -m 2G -bios ovmf-x64/OVMF.fd -hda aqua.hdd
+	qemu-system-x86_64 -M q35 -m 2G -bios ovmf-x64/OVMF.fd -hda aqua.hdd -debugcon stdio
 
 ovmf-x64:
 	mkdir -p ovmf-x64
@@ -30,12 +30,14 @@ limine:
 
 .PHONY: kernel
 kernel:
-	$(MAKE) -C kernel
+	$(MAKE) -C src
+	cp src/aqua.elf -r bin/aqua.elf
+	cp aqua.iso -r bin/aqua.iso
 
 aqua.iso: limine kernel
 	rm -rf iso_root
 	mkdir -p iso_root
-	cp kernel/kernel.elf \
+	cp src/aqua.elf \
 		limine.cfg limine/limine.sys limine/limine-cd.bin limine/limine-cd-efi.bin iso_root/
 	xorriso -as mkisofs -b limine-cd.bin \
 		-no-emul-boot -boot-load-size 4 -boot-info-table \
@@ -57,7 +59,7 @@ aqua.hdd: limine kernel
 	mkdir -p img_mount
 	sudo mount `cat loopback_dev`p1 img_mount
 	sudo mkdir -p img_mount/EFI/BOOT
-	sudo cp -v kernel/kernel.elf limine.cfg limine/limine.sys img_mount/
+	sudo cp -v src/aqua.elf limine.cfg limine/limine.sys img_mount/
 	sudo cp -v limine/BOOTX64.EFI img_mount/EFI/BOOT/
 	sync
 	sudo umount img_mount
@@ -67,9 +69,9 @@ aqua.hdd: limine kernel
 .PHONY: clean
 clean:
 	rm -rf iso_root aqua.iso aqua.hdd
-	$(MAKE) -C kernel clean
+	$(MAKE) -C src clean
 
 .PHONY: distclean
 distclean: clean
 	rm -rf limine ovmf-x64
-	$(MAKE) -C kernel distclean
+	$(MAKE) -C src distclean
