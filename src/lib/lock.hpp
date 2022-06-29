@@ -38,6 +38,22 @@ class lock_guard
     }
 };
 
+class lockit
+{
+    private:
+    lock_t *lock;
+    public:
+    lockit(lock_t &lock)
+    {
+        this->lock = &lock;
+        lock.lock();
+    }
+    ~lockit()
+    {
+        lock->unlock();
+    }
+};
+
 #define CONCAT_IMPL(x, y) x##y
 #define CONCAT(x, y) CONCAT_IMPL(x, y)
 

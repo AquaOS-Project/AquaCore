@@ -12,7 +12,6 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 #define CLEAR "\e[1;1H\e[2J"
 
-extern void (*stivale2_print)(const char *buf, size_t size);
 void e9_putc(char c);
 void e9_print(const char *msg);
 void e9_puts(const char *msg);
