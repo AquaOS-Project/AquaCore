@@ -1,5 +1,6 @@
 #pragma once
-#include <cstdint>
+
+#include <cxx/cstdint>
 
 size_t strlen(const char* str);
 char* strcpy(char* destination, const char* source);

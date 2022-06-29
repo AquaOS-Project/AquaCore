@@ -32,7 +32,6 @@ limine:
 kernel:
 	$(MAKE) -C src
 	cp src/aqua.elf -r bin/aqua.elf
-	cp aqua.iso -r bin/aqua.iso
 
 aqua.iso: limine kernel
 	rm -rf iso_root

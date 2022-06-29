@@ -3,16 +3,16 @@
 #include <cxx/cstdint>
 #include <cxx/cstddef>
 
-static constexpr uint8_t GDT_NULL = 0x00;
-static constexpr uint8_t GDT_CODE_16 = 0x08;
-static constexpr uint8_t GDT_DATA_16 = 0x10;
-static constexpr uint8_t GDT_CODE_32 = 0x18;
-static constexpr uint8_t GDT_DATA_32 = 0x20;
-static constexpr uint8_t GDT_CODE_64 = 0x28;
-static constexpr uint8_t GDT_DATA_64 = 0x30;
-static constexpr uint8_t GDT_USER_CODE_64 = 0x38;
-static constexpr uint8_t GDT_USER_DATA_64 = 0x40;
-static constexpr uint8_t GDT_TSS = 0x48;
+constexpr uint8_t GDT_NULL = 0x00;
+constexpr uint8_t GDT_CODE_16 = 0x08;
+constexpr uint8_t GDT_DATA_16 = 0x10;
+constexpr uint8_t GDT_CODE_32 = 0x18;
+constexpr uint8_t GDT_DATA_32 = 0x20;
+constexpr uint8_t GDT_CODE_64 = 0x28;
+constexpr uint8_t GDT_DATA_64 = 0x30;
+constexpr uint8_t GDT_USER_CODE_64 = 0x38;
+constexpr uint8_t GDT_USER_DATA_64 = 0x40;
+constexpr uint8_t GDT_TSS = 0x48;
 
 struct [[gnu::packed]] GDTDescriptor {
     uint16_t Size;

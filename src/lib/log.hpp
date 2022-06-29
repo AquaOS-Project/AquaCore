@@ -17,3 +17,4 @@ void e9_putc(char c);
 void e9_print(const char *msg);
 void e9_puts(const char *msg);
 void log(const char *format, ...);
+void error(const char *msg);

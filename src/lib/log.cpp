@@ -84,3 +84,7 @@ void log(const char *format, ...) {
     e9_putc('\n');
     va_end(argp);
 }
+
+void error(const char msg) {
+    log("ERROR: %d", msg);
+}

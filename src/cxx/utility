@@ -2,7 +2,7 @@
 #define _CXXSHIM_UTILITY
 
 #include <stddef.h>
-#include <type_traits>
+#include <cxx/type_traits>
 
 #ifdef CXXSHIM_INTEGRATE_GCC
 #include <bits/move.h>
