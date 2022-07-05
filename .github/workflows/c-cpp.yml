@@ -17,7 +17,5 @@ jobs:
       run: sudo apt-get install qemu-kvm lld
     - name: make
       run: make
-    - name: make run
-      run: make run
     - name: make clean
       run: make clean
