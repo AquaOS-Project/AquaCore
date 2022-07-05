@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Install dependencies
+      run: sudo apt-get install clang clang++ qemu-kvm lld
     - name: make
       run: make
     - name: make run
