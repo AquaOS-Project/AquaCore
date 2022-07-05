@@ -1,4 +1,4 @@
-#include <lib/log.hpp>
+#include <common/log.hpp>
 #include <stddef.h>
 
 void (*stivale2_print)(const char *buf, size_t size) = NULL;

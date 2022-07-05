@@ -1,4 +1,4 @@
-#include <lib/math.hpp>
+#include <common/math.hpp>
 
 int pow(int base, int exp) {
     int result = 1;
