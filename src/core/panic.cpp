@@ -1,4 +1,4 @@
-#include <lib/log.hpp>
+#include <common/log.hpp>
 #include <core/cpu.hpp>
 
 registers_t *regs;

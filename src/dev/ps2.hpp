@@ -1,4 +1,4 @@
-#include <lib/math.hpp>
+#include <common/math.hpp>
 #include <cxx/cstdint>
 
 static constexpr uint64_t PS2_MAX_TIMEOUT = 1000;

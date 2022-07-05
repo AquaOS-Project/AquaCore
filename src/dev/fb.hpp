@@ -1,6 +1,6 @@
 #pragma once
 
-#include <lib/math.hpp>
+#include <common/math.hpp>
 #include <boot/limine.h>
 
 extern limine_framebuffer **framebuffers;

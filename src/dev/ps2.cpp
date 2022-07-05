@@ -1,5 +1,5 @@
-#include <lib/port.hpp>
-#include <lib/log.hpp>
+#include <common/port.hpp>
+#include <common/log.hpp>
 #include <dev/ps2.hpp>
 
 static bool canread() {

@@ -1,5 +1,5 @@
-#include <lib/mmio.hpp>
-#include <lib/cpuid.h>
+#include <common/mmio.hpp>
+#include <common/cpuid.h>
 #include <core/cpu.hpp>
 
 uint64_t rdmsr(uint32_t msr) {

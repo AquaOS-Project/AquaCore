@@ -1,5 +1,5 @@
 #include <core/idt.hpp>
-#include <lib/string.hpp>
+#include <common/string.hpp>
 
 static IDTGate idt[256];
 static IDTDescriptor IdtDescriptor;

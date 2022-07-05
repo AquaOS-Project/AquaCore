@@ -1,6 +1,6 @@
 #include <boot/limine.h>
 #include <boot/LimineRequests.hpp>
-#include <lib/log.hpp>
+#include <common/log.hpp>
 #include <core/pic.hpp>
 #include <core/cpu.hpp>
 #include <dev/fb.hpp>

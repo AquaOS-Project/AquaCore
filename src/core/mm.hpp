@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <lib/string.hpp>
+#include <common/string.hpp>
 
 #define pack __attribute__((__packed__))
 #define toMB(x) ((x) / 1024 / 1024)
