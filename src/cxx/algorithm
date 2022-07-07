@@ -1,7 +1,7 @@
 #ifndef _CXXSHIM_ALGORITHM
 #define _CXXSHIM_ALGORITHM
 
-#include <initializer_list>
+#include "initializer_list"
 
 namespace std {
 

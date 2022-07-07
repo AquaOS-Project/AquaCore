@@ -45,6 +45,7 @@ aqua.iso: limine kernel
 		iso_root -o aqua.iso
 	limine/limine-deploy aqua.iso
 	rm -rf iso_root
+	cp aqua.iso -r bin/aqua.iso
 
 aqua.hdd: limine kernel
 	rm -f aqua.hdd

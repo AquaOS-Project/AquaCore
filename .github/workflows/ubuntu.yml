@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install dependencies
       run: sudo apt-get install qemu-kvm lld
-    - name: make
+    - name: Build kernel
       run: make
-    - name: make clean
+    - name: Clean source tree
       run: make clean

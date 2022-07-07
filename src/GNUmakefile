@@ -18,18 +18,18 @@ CXXFLAGS ?= -O2 -g -Wall -Wextra -pipe
 LDFLAGS ?=
 
 override INTERNALCFLAGS :=   \
-	-I.                  \
-        -target x86_64-pc-none-elf \
-        -fno-pic                   \
-	-fno-rtti	           \
-        -mabi=sysv                 \
-        -mno-80387                 \
-        -mno-mmx                   \
-        -mno-3dnow                 \
-        -mno-sse                   \
-        -mno-sse2                  \
-        -mcmodel=kernel            \
-        -std=gnu++20             \
+	-I.                      \
+    -target x86_64-pc-none-elf \
+    -fno-pic                 \
+	-fno-rtti	           	 \
+    -mabi=sysv               \
+    -mno-80387               \
+    -mno-mmx                 \
+    -mno-3dnow               \
+    -mno-sse                 \
+    -mno-sse2                \
+    -mcmodel=kernel          \
+    -std=gnu++20             \
 	-ffreestanding           \
 	-fno-exceptions          \
 	-fno-stack-protector     \
@@ -54,7 +54,7 @@ override INTERNALASFLAGS := \
 	-mno-sse                   \
 	-mno-sse2                  \
 	-mcmodel=kernel	           \
-	-mgeneral-regs-only     \
+	-mgeneral-regs-only        \
 	-masm=intel
 
 override CFILES := $(shell find ./ -type f -name '*.cpp')
