@@ -1,6 +1,6 @@
-#include <stdint.h>
-#include <stddef.h>
 #include <common/math.hpp>
+#include <cxx/cstdint>
+#include <cxx/cstddef>
 
 size_t strlen(const char* str) {
     size_t length = 0;
