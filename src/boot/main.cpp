@@ -1,10 +1,11 @@
 #include <boot/limine.h>
 #include <boot/LimineRequests.hpp>
 #include <common/log.hpp>
+#include <boot/limine.h>
 #include <core/pic.hpp>
 #include <core/cpu.hpp>
-#include <dev/fb.hpp>
 #include <core/idt.hpp>
+#include <dev/fb.hpp>
 
 extern "C" void main(void) {
       if (TerminalRequest.response == NULL || TerminalRequest.response->terminal_count < 1) {
@@ -19,6 +20,7 @@ extern "C" void main(void) {
       log("starting CPU features..");
       InitCPUfeat();
       log("done!");
+      mm::pmm::init();
       log("starting IDT...");
       InitIDT();
       log("done!");
