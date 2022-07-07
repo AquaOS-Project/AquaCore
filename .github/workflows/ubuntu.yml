@@ -2,7 +2,7 @@ name: Build (Ubuntu)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "pmm" ]
   pull_request:
     branches: [ "main" ]
 
