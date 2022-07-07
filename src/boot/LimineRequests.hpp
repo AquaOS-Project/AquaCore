@@ -28,3 +28,9 @@ volatile inline limine_stack_size_request StackSizeRequest {
     .response = nullptr,
     .stack_size = STACK_SIZE
 };
+
+volatile inline limine_memmap_request MemoryMapRequest {    
+    .id = LIMINE_MEMMAP_REQUEST,
+    .revision = 0,
+    .response = nullptr
+};
