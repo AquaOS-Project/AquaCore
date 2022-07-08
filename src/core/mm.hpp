@@ -1,5 +1,6 @@
 #pragma once
 
+#include <common/lock.hpp>
 #include <cxx/cstddef>
 #include <cxx/cstdint>
 
