@@ -77,7 +77,7 @@ namespace mm::vmm {
         bool remapMem(uint64_t VirtualAddress_old, uint64_t VirtualAddress_new, uint64_t flags, bool hugepages);
         bool unmapMem(uint64_t VirtualAddress, bool hugepages);
         void switchTo();
-        void save()
+        void save();
         Pagemap(bool user);
         uint64_t VirtualToPhysical(uint64_t VirtualAddress, bool hugepages = false) {
             PDEntry *PMLEntry = this->virt2pte(VirtualAddress, false, hugepages);
