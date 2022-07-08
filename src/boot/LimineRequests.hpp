@@ -34,3 +34,15 @@ volatile inline limine_memmap_request MemoryMapRequest {
     .revision = 0,
     .response = nullptr
 };
+
+volatile inline limine_kernel_file_request KernelFileRequest {
+    .id = LIMINE_KERNEL_FILE_REQUEST,
+    .revision = 0,
+    .response = nullptr
+};
+
+volatile inline limine_kernel_address_request KernelAddressRequest {
+    .id = LIMINE_KERNEL_ADDRESS_REQUEST,
+    .revision = 0,
+    .response = nullptr
+};
