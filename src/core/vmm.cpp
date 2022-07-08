@@ -55,7 +55,7 @@ namespace mm::vmm {
 
         PDEntry *PMLEntry = this->virt2pte(VirtualAddress, true, hugepages);
         if (PMLEntry == nullptr) {
-            log("VMM: Could not get page map entry!");
+            log("[VMM] Could not get page map entry!");
             return false;
         }
 
@@ -69,7 +69,7 @@ namespace mm::vmm {
 
         PDEntry *PML1Entry = this->virt2pte(VirtualAddress_old, false, hugepages);
         if (PML1Entry == nullptr) {
-            log("VMM: Could not get page map entry!");
+            log("[VMM] Could not get page map entry!");
             this->lock.unlock();
             return false;
         }
@@ -88,7 +88,7 @@ namespace mm::vmm {
 
         PDEntry *PMLEntry = this->virt2pte(VirtualAddress, false, hugepages);
         if (PMLEntry == nullptr) {
-            log("VMM: Could not get page map entry!");
+            log("[VMM] Could not get page map entry!");
             return false;
         }
 
@@ -111,8 +111,7 @@ namespace mm::vmm {
 
         this->TopLevel = pmm::alloc<PTable*>();
 
-        if (user == false)
-        {
+        if (user == false) {
             for (uint64_t i = 0; i < 0x100000000; i += this->large_page_size) {
                 this->mapMem(i, i, flags::Present | flags::Write, true);
                 this->mapMem(tohh(i), i, flags::Present | flags::Write, true);
@@ -146,9 +145,8 @@ namespace mm::vmm {
 
     void init() {
         log("Initialising VMM...");
-
         KernelPagemap = new Pagemap();
         KernelPagemap->switchTo();
+        log("Done!");
     }
 }
-
