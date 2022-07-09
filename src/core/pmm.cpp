@@ -6,7 +6,7 @@
 #include <core/panic.hpp>
 #include <common/log.hpp>
 #include <cxx/algorithm>
-#include <core/mm.hpp>
+#include <core/pmm.hpp>
 
 namespace mm::pmm {
 

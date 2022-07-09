@@ -3,7 +3,7 @@
 #include <common/log.hpp>
 #include <boot/limine.h>
 #include <core/cpu.hpp>
-#include <core/mm.hpp>
+#include <core/vmm.hpp>
 
 namespace mm::vmm { 
     Pagemap *KernelPagemap = nullptr;
