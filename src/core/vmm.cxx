@@ -3,8 +3,7 @@
 #include <common/log.hpp>
 #include <boot/limine.h>
 #include <core/cpu.hpp>
-#include <core/pmm.hpp>
-#include <core/vmm.hpp>
+#include <core/mm.hpp>
 
 namespace mm::vmm { 
     Pagemap *KernelPagemap = nullptr;
@@ -30,7 +29,6 @@ namespace mm::vmm {
         size_t PML1Entry = (VirtualAddress & (static_cast<uint64_t>(0x1FF) << 12)) >> 12;
 
         PTable *pml5, *pml4, *pml3, *pml2, *pml1;
-
 
         pml5 = this->TopLevel;
         if (pml5 == nullptr) return nullptr;
@@ -146,7 +144,7 @@ namespace mm::vmm {
 
     void init() {
         log("Initialising VMM...");
-        KernelPagemap = Pagemap();
+        KernelPagemap = new Pagemap();
         KernelPagemap->switchTo();
         log("Done!");
     }

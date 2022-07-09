@@ -4,8 +4,7 @@
 #include <core/pic.hpp>
 #include <core/cpu.hpp>
 #include <core/idt.hpp>
-#include <core/pmm.hpp>
-#include <core/vmm.hpp>
+#include <core/mm.hpp>
 #include <dev/fb.hpp>
 
 extern "C" void main(void) {
@@ -22,15 +21,13 @@ extern "C" void main(void) {
       InitCPUfeat();
       log("done!");
       mm::pmm::init();
-      mm::vmm::init();
-      log("starting IDT...");
-      InitIDT();
-      log("done!");
+      //mm::vmm::init();
+      idt::init();
       log("starting framebuffer...");
       InitFB();
       log("done!");
       TerminalRequest.response->write(terminal, "check debug console if you want to interact with aqua", 54);
       for (;;) {
          asm ("hlt");
-  }
+      }
 }
