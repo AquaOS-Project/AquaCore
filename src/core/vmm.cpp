@@ -3,6 +3,7 @@
 #include <common/log.hpp>
 #include <boot/limine.h>
 #include <core/cpu.hpp>
+#include <core/pmm.hpp>
 #include <core/vmm.hpp>
 
 namespace mm::vmm { 
