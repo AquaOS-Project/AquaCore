@@ -146,7 +146,7 @@ namespace mm::vmm {
 
     void init() {
         log("Initialising VMM...");
-        KernelPagemap = new Pagemap();
+        KernelPagemap = Pagemap();
         KernelPagemap->switchTo();
         log("Done!");
     }
