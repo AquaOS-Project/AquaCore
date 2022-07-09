@@ -51,7 +51,7 @@ namespace mm::vmm {
         return &pml1->entries[PML1Entry];
     }
 
-    bool Pagemap::mapMem(uint64_t VirtualAddress, uint64_t paddr, uint64_t flags, bool hugepages) {
+    bool Pagemap::mapMem(uint64_t VirtualAddress, uint64_t PhysicalAddress, uint64_t flags, bool hugepages) {
         lockit(this->lock);
 
         PDEntry *PMLEntry = this->virt2pte(VirtualAddress, true, hugepages);
@@ -60,7 +60,7 @@ namespace mm::vmm {
             return false;
         }
 
-        PMLEntry->SetAddress(paddr >> 12);
+        PMLEntry->SetAddress(PhysicalAddress >> 12);
         PMLEntry->SetFlags(flags | (hugepages ? LargerPages : 0), true);
         return true;
     }
@@ -75,12 +75,12 @@ namespace mm::vmm {
             return false;
         }
 
-        uint64_t paddr = PML1Entry->GetAddress() << 12;
+        uint64_t PhysicalAddress = PML1Entry->GetAddress() << 12;
         PML1Entry->value = 0;
         invlpg(VirtualAddress_old);
         this->lock.unlock();
 
-        this->mapMem(VirtualAddress_new, paddr, flags, hugepages);
+        this->mapMem(VirtualAddress_new, PhysicalAddress, flags, hugepages);
         return true;
     }
 
@@ -134,9 +134,9 @@ namespace mm::vmm {
         }
 
         for (size_t i = 0; i < KernelFileRequest.response->kernel_file->size; i += this->page_size) {
-            uint64_t paddr = KernelAddressRequest.response->physical_base + i;
+            uint64_t PhysicalAddress = KernelAddressRequest.response->physical_base + i;
             uint64_t VirtualAddress = KernelAddressRequest.response->virtual_base + i;
-            this->mapMem(VirtualAddress, paddr, flags::Present | flags::Write);
+            this->mapMem(VirtualAddress, PhysicalAddress, flags::Present | flags::Write);
         }
     }
 
