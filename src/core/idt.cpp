@@ -6,7 +6,7 @@
 
 namespace idt {
     InterruptHandler handlers[256];
-    static IDTGate idt[256];
+    IDTEntry idt[256];
     static IDTDescriptor IdtDescriptor;
     IDTPtr idtr;
 
