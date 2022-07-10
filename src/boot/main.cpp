@@ -21,14 +21,13 @@ extern "C" void main(void) {
       InitCPUfeat();
       log("done!");
       mm::pmm::init();
-      log("starting IDT...");
-      InitIDT();
-      log("done!");
+      mm::vmm::init();
+      idt::init();
       log("starting framebuffer...");
       InitFB();
       log("done!");
       TerminalRequest.response->write(terminal, "check debug console if you want to interact with aqua", 54);
       for (;;) {
          asm ("hlt");
-  }
+      }
 }

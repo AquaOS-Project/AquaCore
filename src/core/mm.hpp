@@ -72,19 +72,19 @@ namespace mm::vmm {
         uint64_t page_size = 0x1000;
         lock_t lock;
 
+        bool mapMem(uint64_t VirtualAddress, uint64_t PhysicalAddress, uint64_t flags = (Present | Write), bool hugepages = false);
+        bool remapMem(uint64_t VirtualAddress_old, uint64_t VirtualAddress_new, uint64_t flags = (Present | Write), bool hugepages = false);
+        bool unmapMem(uint64_t VirtualAddress, bool hugepages = false);
+
         PDEntry *virt2pte(uint64_t VirtualAddress, bool allocate = true, bool hugepages = false);
-        bool mapMem(uint64_t VirtualAddress, uint64_t paddr, uint64_t flags, bool hugepages);
-        bool remapMem(uint64_t VirtualAddress_old, uint64_t VirtualAddress_new, uint64_t flags, bool hugepages);
-        bool unmapMem(uint64_t VirtualAddress, bool hugepages);
-        void switchTo();
-        void save();
-        Pagemap(bool user);
         uint64_t VirtualToPhysical(uint64_t VirtualAddress, bool hugepages = false) {
             PDEntry *PMLEntry = this->virt2pte(VirtualAddress, false, hugepages);
             if (PMLEntry == nullptr || !PMLEntry->GetFlags(Present)) return 0;
-
             return PMLEntry->GetAddress() << 12;
         }
+        void switchTo();
+        void save();
+        Pagemap(bool user = false);
     };
 
     extern Pagemap *KernelPagemap;

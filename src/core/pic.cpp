@@ -1,6 +1,6 @@
-#include <core/pic.hpp>
-#include <common/log.hpp>
 #include <common/port.hpp>
+#include <common/log.hpp>
+#include <core/pic.hpp>
 
 void eoi(uint64_t int_no) {
     if (int_no >= 40) outb(PIC2_COMMAND, PIC_EOI);
