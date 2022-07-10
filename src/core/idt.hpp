@@ -78,5 +78,8 @@ namespace idt {
         bool operator()(registers_t *regs);
     };
 
+    extern InterruptHandler handlers[256];
+    extern IDTEntry idt[256];
+    extern IDTPtr idtr;
     void init();
 }
