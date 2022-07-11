@@ -5,9 +5,10 @@ ENTRY(main)
 
 PHDRS
 {
-    text    PT_LOAD    FLAGS((1 << 0) | (1 << 2)) ;
-    rodata  PT_LOAD    FLAGS((1 << 2)) ;
-    data    PT_LOAD    FLAGS((1 << 1) | (1 << 2)) ;
+    null    PT_NULL    FLAGS(0);
+    text    PT_LOAD    FLAGS((1 << 0) | (1 << 2));
+    rodata  PT_LOAD    FLAGS((1 << 2));
+    data    PT_LOAD    FLAGS((1 << 1) | (1 << 2));
 }
 
 SECTIONS
@@ -35,4 +36,3 @@ SECTIONS
         *(.bss .bss.*)
     } :data
 }
-
