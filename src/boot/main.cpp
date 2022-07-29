@@ -21,7 +21,6 @@ extern "C" void main(void) {
       InitCPUfeat();
       log("done!");
       mm::pmm::init();
-      mm::vmm::init();
       idt::init();
       log("starting framebuffer...");
       InitFB();
