@@ -2,58 +2,51 @@
 
 #include <cxx/atomic>
 
-class lock_t
-{
+class lock_t {
     private:
     std::atomic<bool> locked = false;
 
     public:
-    void lock()
-    {
+    void lock() {
         while (__atomic_test_and_set(&this->locked, __ATOMIC_ACQUIRE));
     }
-    void unlock()
-    {
+
+    void unlock() {
         __atomic_clear(&this->locked, __ATOMIC_RELEASE);
     }
-    bool test()
-    {
+    bool test() {
         return this->locked;
     }
 };
 
-class lock_guard
-{
+class lock_guard {
     private:
     lock_t *lock;
     public:
-    lock_guard(lock_t &lock)
-    {
+    lock_guard(lock_t &lock) {
         this->lock = &lock;
         this->lock->lock();
     }
-    ~lock_guard()
-    {
+
+    ~lock_guard() {
         lock->unlock();
     }
 };
 
-class lockit
-{
+class lockit {
     private:
     lock_t *lock;
     public:
-    lockit(lock_t &lock)
-    {
+    lockit(lock_t &lock) {
         this->lock = &lock;
         lock.lock();
     }
-    ~lockit()
-    {
+    ~lockit() {
         lock->unlock();
     }
 };
 
+#define NewLock(name) static lock_t name;
 #define CONCAT_IMPL(x, y) x##y
 #define CONCAT(x, y) CONCAT_IMPL(x, y)
 

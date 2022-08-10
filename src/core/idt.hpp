@@ -44,7 +44,7 @@ namespace idt {
         void set(void *isr, uint8_t typeattr = 0x8E, uint8_t ist = 0) {
             uint64_t israddr = reinterpret_cast<uint64_t>(isr);
             this->Offset1 = static_cast<uint16_t>(israddr);
-            this->Selector = GDT_CODE;
+            this->Selector = gdt::GDT_CODE;
             this->IST = ist;
             this->TypeAttr = typeattr;
             this->Offset2 = static_cast<uint16_t>(israddr >> 16);
